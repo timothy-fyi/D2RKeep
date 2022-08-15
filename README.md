@@ -4,6 +4,13 @@ Have you ever wanted to know how much time you have spent playing this addicting
 
 D2RKeep has a Time Keeper with a log, as well as a Graph tool which will graph your time played over your declared amount of days.
 
+# Requirements
+- Python 3.x
+- Pandas
+- Matplotlib
+- Psutil
+- yaml
+
 # About the config.yaml file:
 ```days_to_review```: The amount of days you would like to graph to display, and the time keeper to display under the total time played
 
