@@ -20,3 +20,10 @@ D2RKeep has a Time Keeper with a log, as well as a Graph tool which will graph y
 1. (Optional) Edit the ```config.yaml``` to your liking
 1. Run ```d2rkeep.py```
 2. Select the tool you would like to use
+
+# Planned Updates
+- GUI
+- Compile to exe so it's easier for end users to run
+
+# Possible Issues
+- You may run into weird Python errors when running. This is because it's quite possible I have not caught all the possible errors that can arise
