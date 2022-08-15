@@ -17,6 +17,6 @@ D2RKeep has a Time Keeper with a log, as well as a Graph tool which will graph y
 ```set_timeout```: Sets the timeout to look for D2R.exe (in minutes). Once the time has passed, the program will end itself
 
 # How To:
-1. (Optional) Edit the configuration to your liking
+1. (Optional) Edit the ```config.yaml``` to your liking
 1. Run ```d2rkeep.py```
 2. Select the tool you would like to use
