@@ -5,32 +5,33 @@ from datetime import datetime, date, timedelta
 import os
 import yaml
 
+
 def time_graph():
 
     file_path = os.path.dirname(__file__)
     current_day = date.today()
 
     try:
-        config_file = open(file_path + "\\config.yaml", 'r')
+        config_file = open(file_path + "\\config.yaml", "r")
     except FileNotFoundError:
-        config_default = {'days_to_review': 7, 'set_timeout': 5}
+        config_default = {"days_to_review": 7, "set_timeout": 5}
         with open(file_path + "\\config.yaml", "w") as new_config:
             new_config.write("# User Configuration\n\n")
             config_create = yaml.dump(config_default, new_config)
-        config_file = open(file_path + "\\config.yaml", 'r')
+        config_file = open(file_path + "\\config.yaml", "r")
 
     try:
         play_data_file = open(file_path + "\\graph_data.txt", "r")
     except FileNotFoundError:
         with open(file_path + "\\graph_data.txt", "w") as play_data_file:
-            play_data_file.write(str(current_day) + "," + "0"  + "\n")
+            play_data_file.write(str(current_day) + "," + "0" + "\n")
 
     config = yaml.safe_load(config_file)
 
     try:
         days_to_review = config["days_to_review"]
     except KeyError:
-        print("Error in configuration file. Likely, the 'days_to_review' line has been renamed or deleted. If you are unable to fix this error, delete 'config.yaml' and rerun the Time Keeper.")
+        print("Error in configuration file. Likely, the \"days_to_review\" line has been renamed or deleted. If you are unable to fix this error, delete \"config.yaml\" and rerun the Time Keeper.")
         quit()
 
     if isinstance(days_to_review, int):
@@ -43,10 +44,10 @@ def time_graph():
         play_data_file = open(file_path + "\\graph_data.txt", "r")
         play_data = pd.read_csv(file_path + "\\graph_data.txt", header=None)
     except pd.errors.ParserError:
-        print("Data load error, check 'graph_data.txt'. Ensure each play time has its own line, and that there aren't multiple days/sessions on one line.")
+        print("Data load error, check \"graph_data.txt\". Ensure each play time has its own line, and that there aren't multiple days/sessions on one line.")
         quit()
-    play_data.columns =["day","time_played"]
-    play_data["time_played"] = play_data["time_played"]/3600 # maybe don't go by hours?
+    play_data.columns = ["day", "time_played"]
+    play_data["time_played"] = play_data["time_played"]/3600  # maybe don"t go by hours?
 
     # adjust dataframe to capture necessary data
     today = datetime.now().date()
