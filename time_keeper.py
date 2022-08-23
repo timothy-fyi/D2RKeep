@@ -8,6 +8,16 @@ import pandas as pd
 
 def time_keeper():
 
+    def d2r_check():
+        open_programs = []
+        for prog in psutil.process_iter():
+            prog = prog.name()
+            open_programs.append(prog)
+        if "D2R.exe" in open_programs:
+            return 1
+        else:
+            return 0
+
     file_path = os.path.dirname(__file__)
     current_day = date.today()
 
@@ -83,25 +93,26 @@ def time_keeper():
 
         i = 0
         while True:
-            d2r_open = "D2R.exe" in (prog.name() for prog in psutil.process_iter())
-            if d2r_open is False:
+            d2r_check()
+            if d2r_check() == 0:
                 time.sleep(1)
                 i += 1
                 # times out after x minutes to free up resources
                 if i == timeout * 60:
                     print("D2R not opened within " + str(timeout) + " minute(s), please restart program to log playtime.")
                     quit()
-            elif d2r_open is True:
+            elif d2r_check() == 1:
                 time_opened = datetime.now().strftime(fmt)
                 print("D2R opened at " + time_opened)
                 break
 
+        # checks if D2R gets closed after being open
         while True:
-            d2r_closed = "D2R.exe" in (prog.name() for prog in psutil.process_iter())
-            if d2r_closed is True:
+            d2r_check()
+            if d2r_check() == 1:
                 pass
                 time.sleep(1)
-            elif d2r_closed is False:
+            elif d2r_check() == 0:
                 time_closed = datetime.now().strftime(fmt)
                 print("D2R closed at " + time_closed)
                 break
@@ -127,8 +138,8 @@ def time_keeper():
         with open(file_path + "\\log.txt", "a") as log:
             log.write(str(current_day) + ": " + str(time_played) + "\n")
 
-        with open(file_path + "\\graph_data.txt", "a") as log:
-            log.write(str(current_day) + "," + str(time_played_seconds) + "\n")
+        with open(file_path + "\\graph_data.txt", "a") as graph_data:
+            graph_data.write(str(current_day) + "," + str(time_played_seconds) + "\n")
 
     except KeyboardInterrupt:
         print("D2RKeep forced quit.")
