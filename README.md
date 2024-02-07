@@ -12,7 +12,7 @@ D2RKeep has a Time Keeper with a log, as well as a Graph tool that will graph yo
 - yaml
 
 # About the config.yaml file:
-```days_to_review```: The number of days you would like to graph to display and the time keeper to display under the total time played
+```days_to_review```: The number of days you would like to graph to display and the number of days to display under the total time played in the "Stats" section
 
 ```set_timeout```: Sets the timeout to look for D2R.exe (in minutes). Once the time has passed, the program will end itself
 
